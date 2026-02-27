@@ -38,17 +38,9 @@ let package = Package(
         .library(
             name: "WalletConnectIdentity",
             targets: ["WalletConnectIdentity"]),
-        .library(
-            name: "ReownAppKit",
-            targets: ["ReownAppKit"]),
-        .library(
-            name: "ReownAppKitUI",
-            targets: ["ReownAppKitUI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
-        .package(url: "https://github.com/WalletConnect/QRCode", from: "14.3.1"),
-        .package(name: "CoinbaseWalletSDK", url: "https://github.com/MobileWalletProtocol/wallet-mobile-sdk", .upToNextMinor(from: "1.1.0")),
     ],
     targets: [
         .target(
@@ -127,35 +119,6 @@ let package = Package(
         .target(
             name: "Events",
             dependencies: ["WalletConnectUtils", "WalletConnectNetworking"]),
-        .target(
-            name: "ReownAppKit",
-            dependencies: [
-                "QRCode",
-                "WalletConnectSign",
-                "ReownAppKitUI",
-                "ReownAppKitBackport",
-                "CoinbaseWalletSDK"
-            ],
-            path: "Sources/ReownAppKit",
-            resources: [
-                .process("Resources/Assets.xcassets"),
-                .copy("PackageConfig.json")
-            ]
-        ),
-        .target(
-            name: "ReownAppKitUI",
-            dependencies: [
-                "ReownAppKitBackport"
-            ],
-            path: "Sources/ReownAppKitUI",
-            resources: [
-                .process("Resources/Assets.xcassets")
-            ]
-        ),
-        .target(
-            name: "ReownAppKitBackport",
-            path: "Sources/ReownAppKitBackport"
-        ),
         .testTarget(
             name: "WalletConnectSignTests",
             dependencies: ["WalletConnectSign", "WalletConnectUtils", "TestingUtils", "WalletConnectVerify"]),
