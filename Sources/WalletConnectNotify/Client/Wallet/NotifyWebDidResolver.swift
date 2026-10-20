@@ -1,3 +1,4 @@
+import HTTPClient
 import Foundation
 
 final class NotifyWebDidResolver {
@@ -7,7 +8,7 @@ final class NotifyWebDidResolver {
 
     func resolveDidDoc(appDomain: String) async throws -> WebDidDoc {
         guard let didDocUrl = URL(string: "https://\(appDomain)/.well-known/did.json") else { throw Errors.invalidUrl }
-        let (data, _) = try await URLSession.shared.data(from: didDocUrl)
+        let (data, _) = try await ReownProtectedURLSession.shared.data(from: didDocUrl)
         return try JSONDecoder().decode(WebDidDoc.self, from: data)
     }
 

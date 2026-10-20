@@ -1,3 +1,4 @@
+import HTTPClient
 import Foundation
 
 /// Class responsible for handling wallet service HTTP requests
@@ -16,7 +17,7 @@ final class WalletServiceSessionRequester {
         self.logger = logger
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30.0 // 30 second timeout
-        self.session = URLSession(configuration: config)
+        self.session = ReownProtectedURLSession.make(configuration: config)
     }
 
     /// Makes an HTTP request to the wallet service and returns the response

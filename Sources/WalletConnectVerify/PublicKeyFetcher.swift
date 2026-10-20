@@ -1,3 +1,4 @@
+import HTTPClient
 import Foundation
 import CryptoKit
 
@@ -72,7 +73,7 @@ class PublicKeyFetcher: PublicKeyFetching {
             throw Errors.invalidURL
         }
 
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let (data, response) = try await ReownProtectedURLSession.shared.data(from: url)
         if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
             let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
             throw Errors.httpError(statusCode: httpResponse.statusCode, message: errorMessage)

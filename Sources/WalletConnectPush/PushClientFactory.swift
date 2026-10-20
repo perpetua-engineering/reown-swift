@@ -1,3 +1,4 @@
+import HTTPClient
 import Foundation
 
 public struct PushClientFactory {
@@ -32,7 +33,7 @@ public struct PushClientFactory {
         let sessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.timeoutIntervalForRequest = 10.0
         sessionConfiguration.timeoutIntervalForResource = 10.0
-        let session = URLSession(configuration: sessionConfiguration)
+        let session = ReownProtectedURLSession.make(configuration: sessionConfiguration)
 
         let logger = ConsoleLogger(prefix: "👂🏻", loggingLevel: .off)
         let httpClient = HTTPNetworkClient(host: pushHost, session: session)

@@ -1,3 +1,4 @@
+import HTTPClient
 import Foundation
 
 public final class OriginVerifier {
@@ -11,7 +12,7 @@ public final class OriginVerifier {
         let sessionConfiguration = URLSessionConfiguration.default
         sessionConfiguration.timeoutIntervalForRequest = 5.0
         sessionConfiguration.timeoutIntervalForResource = 5.0
-        let session = URLSession(configuration: sessionConfiguration)
+        let session = ReownProtectedURLSession.make(configuration: sessionConfiguration)
         
         let httpClient = HTTPNetworkClient(host: verifyHost, session: session)
         

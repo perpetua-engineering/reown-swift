@@ -1,3 +1,4 @@
+import HTTPClient
 import Foundation
 
 protocol NetworkingServiceProtocol {
@@ -10,7 +11,7 @@ class NetworkingService: NetworkingServiceProtocol {
     private let sdkVersion: String
     private let apiURL = URL(string: "https://pulse.walletconnect.com/batch")!
 
-    init(session: URLSession = .shared, projectId: String, sdkVersion: String) {
+    init(session: URLSession = ReownProtectedURLSession.shared, projectId: String, sdkVersion: String) {
         self.session = session
         self.projectId = projectId
         self.sdkVersion = sdkVersion

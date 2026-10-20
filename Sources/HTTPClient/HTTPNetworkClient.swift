@@ -6,7 +6,7 @@ public actor HTTPNetworkClient: HTTPClient {
 
     private let session: URLSession
 
-    public init(host: String, session: URLSession = .shared) {
+    public init(host: String, session: URLSession = ReownProtectedURLSession.shared) {
         self.host = host
         self.session = session
     }

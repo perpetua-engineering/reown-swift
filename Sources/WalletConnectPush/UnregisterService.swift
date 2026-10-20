@@ -1,3 +1,4 @@
+import HTTPClient
 import Foundation
 
 actor UnregisterService {
@@ -39,7 +40,7 @@ actor UnregisterService {
             request.addValue("\(pushAuthToken)", forHTTPHeaderField: "Authorization")
 
             do {
-                let (_, response) = try await URLSession.shared.data(for: request)
+                let (_, response) = try await ReownProtectedURLSession.shared.data(for: request)
 
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                     logger.error("Failed to unregister from Push Server")

@@ -43,9 +43,10 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.3.0"),
     ],
     targets: [
+        .testTarget(name: "HTTPClientTrustTests", dependencies: ["HTTPClient"]),
         .target(
             name: "WalletConnectSign",
-            dependencies: ["WalletConnectPairing", "WalletConnectVerify", "WalletConnectSigner", "Events"],
+            dependencies: ["HTTPClient", "WalletConnectPairing", "WalletConnectVerify", "WalletConnectSigner", "Events"],
             path: "Sources/WalletConnectSign",
             resources: [.process("Resources/PrivacyInfo.xcprivacy")]),
         .target(
@@ -55,12 +56,12 @@ let package = Package(
             resources: [.process("Resources/PrivacyInfo.xcprivacy")]),
         .target(
             name: "WalletConnectNotify",
-            dependencies: ["WalletConnectPairing", "WalletConnectIdentity", "WalletConnectPush", "WalletConnectSigner", "Database"],
+            dependencies: ["HTTPClient", "WalletConnectPairing", "WalletConnectIdentity", "WalletConnectPush", "WalletConnectSigner", "Database"],
             path: "Sources/WalletConnectNotify",
             resources: [.process("Resources/PrivacyInfo.xcprivacy")]),
         .target(
             name: "WalletConnectPush",
-            dependencies: ["WalletConnectNetworking", "WalletConnectJWT"],
+            dependencies: ["HTTPClient", "WalletConnectNetworking", "WalletConnectJWT"],
             path: "Sources/WalletConnectPush",
             resources: [.process("Resources/PrivacyInfo.xcprivacy")]),
         .target(
@@ -111,14 +112,14 @@ let package = Package(
             path: "Sources/ReownRouter/Router"),
         .target(
             name: "WalletConnectVerify",
-            dependencies: ["WalletConnectUtils", "WalletConnectNetworking", "WalletConnectJWT"],
+            dependencies: ["HTTPClient", "WalletConnectUtils", "WalletConnectNetworking", "WalletConnectJWT"],
             resources: [.process("Resources/PrivacyInfo.xcprivacy")]),
         .target(
             name: "Database",
             dependencies: ["WalletConnectUtils"]),
         .target(
             name: "Events",
-            dependencies: ["WalletConnectUtils", "WalletConnectNetworking"]),
+            dependencies: ["HTTPClient", "WalletConnectUtils", "WalletConnectNetworking"]),
         .testTarget(
             name: "WalletConnectSignTests",
             dependencies: ["WalletConnectSign", "WalletConnectUtils", "TestingUtils", "WalletConnectVerify"]),
